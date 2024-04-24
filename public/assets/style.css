@@ -1,0 +1,50 @@
+#detail{
+    width: 70%;
+    margin: auto;
+    position: relative;
+    top: 100px;
+    margin-top: 20px;
+}
+#detail{
+  text-align: center;
+}
+#detail a{
+    text-decoration: none;
+}
+form{
+    width: 80%;
+    margin: auto;
+    position: relative;
+}
+#pro{
+    display: flex;
+    justify-content: space-between;
+    margin-left: 10%;
+     margin-right: 10%;
+}
+#employee{
+    position: relative;
+    top: 100px;
+    margin: auto;
+    
+}
+
+#dev-table{
+    text-align: center;
+}
+#footer{
+    position: relative;
+    top:100px;
+    width: 100%;
+    text-align: center;
+    height: 50px;
+    color: white;
+    margin-top: 20px;
+}
+
+
+@media screen and (max-width: 800px) {
+    #detail{
+        width: 90%;
+    }
+}

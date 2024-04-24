@@ -1,0 +1,184 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title></title>
+    <!-- Latest compiled and minified CSS -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
+
+    <!-- jQuery library -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+
+    <!-- Popper JS -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"></script>
+
+    <!-- Latest compiled JavaScript -->
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
+    <link type="text/css" href="/assets/style.css" rel="stylesheet">
+
+    <script src="https://code.jquery.com/jquery-3.4.1.min.js" integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo=" crossorigin="anonymous"></script>
+</head>
+<body>
+
+    <!-- a navbar using bootstrap classes -->
+
+    <nav class="nav navbar navbar-expand-md bg-dark navbar-dark fixed-top">
+        <div class="container">
+            <a href="/" class="navbar-brand">
+                <h3 class="d-inline align-middle">EMS</h3>
+            </a>
+            <button class="navbar-toggler" data-toggle="collapse" data-target="#navbarNav">
+                <span class="navbar-toggler-icon">
+
+                </span>
+            </button>
+
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav ml-auto">
+
+                    <li class="nav-item"><a href="/" class="nav-link" style="font-size:25px; margin-right: 10px;">Home</a></li>
+
+                </ul>
+            </div>
+        </div>
+
+
+
+    </nav>
+
+    <!-- navbar ends here -->
+
+    <!-- A Table for showing all the details of the employee -->
+
+    <div class="container" id="employee">
+
+        <div class="row">
+            <div class="col-md-12">
+                <div class="panel panel-primary">
+
+
+                    <table class="table table-hover" id="dev-table">
+                        <thead>
+                            <h3 style="position: width:100%; text-align:center; margin-bottom: 20px;">Employee Details</h3>
+                        </thead>
+                        <tbody>
+                          <% if (employee && employee.length > 0) { %>
+                              <tr>
+                                  <th>Name</th>
+                                  <td><%= employee[0].name %></td>
+                              </tr>
+                              <tr>
+                                  <th>Email address</th>
+                                  <td><%= employee[0].email %></td>
+                              </tr>
+                              <tr>
+                                  <th>Gender</th>
+                                  <td><%= employee[0].gender %></td>
+                              </tr>
+                              <tr>
+                                  <th>Job Title</th>
+                                  <td><%= employee[0].title %></td>
+                              </tr>
+                              <tr>
+                                  <th>Salary</th>
+                                  <td>Rs.<%= employee[0].salary %>/annum</td>
+                              </tr>
+                              <tr>
+                                  <th>Contact Number:</th>
+                                  <td>+91-<%= employee[0].phone %></td>
+                              </tr>
+                              <tr>
+                                  <th>Permanent residence</th>
+                                  <td><%= employee[0].address %></td>
+                              </tr>
+                              <tr>
+                                  <th>Location</th>
+                                  <td><%= employee[0].location %></td>
+                              </tr>
+                          <% } else { %>
+                              <tr>
+                                  <td colspan="2">No employee data available</td>
+                              </tr>
+                          <% } %>
+                      </tbody>
+                      
+                    </table>
+
+                    <!-- table ends here -->
+                </div>
+            </div>
+        </div>
+        <div style="float: right;">
+
+            <!-- a button which opens a prefilled form for updating the employee's details -->
+            <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#updateModalLong" style="margin-right: 10px;">
+                Update
+            </button>
+            <!-- button ends here -->
+
+            <!-- a button which deletes the employee's details from the database -->
+            <button type="button" class="btn btn-danger delete ">delete</button>
+            <!--button ends here -->
+
+        </div>
+    </div>
+
+    <!-- the modal form with already filled inputs. These inputs can be changed and hence updates the database field-->
+    <div class="modal fade" id="updateModalLong">
+        <div class="modal-dialog modal-dialog centered">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="exampleModalLongTitle">Update Existing Employee</h5>
+                    <button type="button" class="close" data-dismiss="modal">
+                        <span>&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                  <form method="POST" action="/<%= employee._id %>">
+                      <div class="form-group">
+                          <label for="name"> Name</label>
+                          <input type="text" class="form-control" name="name" value="<%= employee.name %>" id="name">
+                      </div>
+                      <div class="form-group">
+                          <label for="email">Email</label>
+                          <input type="text" class="form-control" name="email" value="<%= employee.email %>">
+                      </div>
+                      <div class="form-group">
+                          <label for="gender">Gender</label>
+                          <select class="form-control" name="gender" id="exampleFormControlSelect1">
+                              <option value="Male" <%= employee.gender === 'Male' ? 'selected' : '' %>>Male</option>
+                              <option value="Female" <%= employee.gender === 'Female' ? 'selected' : '' %>>Female</option>
+                              <option value="Other" <%= employee.gender === 'Other' ? 'selected' : '' %>>Other</option>
+                          </select>
+                      </div>
+                      <div class="form-group">
+                          <label for="address">Address</label>
+                          <input type="text" class="form-control" name="address" value="<%= employee.address %>">
+                      </div>
+                      <div class="form-group">
+                          <label for="phone">Phone</label>
+                          <input type="text" class="form-control" name="phone" value="<%= employee.phone %>">
+                      </div>
+                      <div class="form-group">
+                          <label for="title">Job Title</label>
+                          <input type="text" class="form-control" name="title" value="<%= employee.title %>">
+                      </div>
+                      <div class="form-group">
+                          <label for="salary">Salary (in Rupees/annum)</label>
+                          <input type="text" class="form-control" name="salary" value="<%= employee.salary %>">
+                      </div>
+                      <div class="modal-footer">
+                          <button class="btn btn-primary btn-block update">Update</button>
+                      </div>
+                  </form>
+              </div>
+              
+
+            </div>
+        </div>
+    </div>
+    <!-- the modal form ends here -->
+
+
+</body>
+<script src="/assets/script.js"></script>
+</html>

@@ -1,0 +1,225 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    
+    <title>EMS</title>
+    
+    <link type="text/css" href="/assets/style.css" rel="stylesheet">
+    
+    <script src="https://code.jquery.com/jquery-3.4.1.min.js" integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo=" crossorigin="anonymous"></script>
+    <!-- Latest compiled and minified CSS -->
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
+
+<!-- jQuery library -->
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+
+<!-- Popper JS -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"></script>
+
+<!-- Latest compiled JavaScript -->
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
+</head>
+<body>
+
+    <!-- a navbar using bootstrap -->
+    
+  <nav class="nav navbar navbar-expand-md bg-dark navbar-dark fixed-top">
+        <div class="container">
+            <a href="/" class="navbar-brand">
+                <h3 class="d-inline align-middle">EMS</h3>
+            </a>
+            
+            
+            <!-- button for mobile view -->
+            <button class="navbar-toggler" data-toggle="collapse" data-target="#navbarNav">
+                <span class="navbar-toggler-icon">
+
+                </span>
+            </button>
+            
+            <!-- button for mobile view ends here -->
+
+            
+            <!-- A search bar for searching the employee by the employee's name-->
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav ml-auto">
+                  <li class="nav-item">
+                    <input class="search" type="text" id="searchInput" oninput="searchEmployee()" placeholder="Search by name.." style="margin-top:12px; margin-right: 20px; border-radius: 4px; outline: none;">
+                </li>
+                
+                    
+            <!-- Search bar ends here -->        
+                   
+            <!-- A button which opens a modal form for adding a new employee-->        
+                    <li class="nav-item">
+                           <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModalLong" style="margin-top:8px; border-radius: 4px;">
+ Add Employee
+</button>
+                        </li>
+    
+                    <!-- Button ends here -->
+                    
+                </ul>
+            </div>
+        </div>
+
+   
+
+    </nav>
+    
+    <!-- Navbar ends here -->
+    
+    
+    <!-- Dashboard with Names and Job title of all the employees -->
+    
+    <h2 style="position:relative; top: 100px;text-align:center; color: #70E3F1">Dashboard</h2>
+    <div class="container" >
+        
+        <div style="display:none;"> 
+        <div class="card text-center " id="detail" style="display:none;">
+                        <a href="/" class="emp">
+  <div class="card-header" >
+    <h4>Employee</h4>
+  </div>
+  <div class="card-body" id="pro" >
+      <div><img src="/assets/img/profile.jpg" height="90px"></div><div><h3 class="nam"></h3><p>Working as </p></div>
+  </div>
+  </a>
+</div>
+</div>
+              </div>
+    
+              <% for(var i=0; i< employees.length; i++){ %>
+                <div class="card text-center" id="detail">
+                    <a href="/<%= employees[i]._id %>" class="emp">
+                        <div class="card-header">
+                            <h4>Employee</h4>
+                        </div>
+                        <div class="card-body" id="pro">
+                            <div><img src="/assets/img/profile.jpg" height="90px"></div>
+                            <div>
+                                <h3 class="nam"><%= employees[i].name %></h3>
+                                <p>Working as <%= employees[i].title %></p>
+                            </div>
+                        </div>
+                    </a>
+                </div>
+            <% } %>
+            
+    <!-- Dashboard ends here -->
+    
+    
+    <!-- Modal form for adding employee which opens when the add employee button is clicked -->
+    <div class="modal fade" id="exampleModalLong" >
+  <div class="modal-dialog modal-dialog centered" >
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLongTitle">Add New Employee</h5>
+        <button type="button" class="close" data-dismiss="modal" >
+          <span >&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+   
+              <form  method="POST" action="/" >
+                  <div class="form-group">
+                      <label for="name"> Name</label>
+                      <input type="text" class="form-control" name="name">
+                  </div>
+                  <div class="form-group">
+                          <label for="email">Email</label>
+                          <input type="text" class="form-control" name="email">
+                      </div>
+                      <div class="form-group">
+                            <label for="gender">Gender</label>
+                            <select class="form-control" name="gender" id="exampleFormControlSelect1">
+                              <option>Male</option>
+                              <option>Female</option>
+                              <option>Other</option>
+                             
+                            </select>
+                          </div>
+                      <div class="form-group">
+                        <label for="name">address</label>
+                        <input type="text" class="form-control" name="address">
+                    </div>
+                    <div class="form-group">
+                      <label for="name">Phone</label>
+                      <input type="text" class="form-control" name="phone">
+                  </div>
+                  <div class="form-group">
+                    <label for="name">Job Title</label>
+                    <input type="text" class="form-control" name="title">
+                </div>
+                <div class="form-group">
+                  <label for="name">Salary(in Rupees/annum)</label>
+                  <input type="text" class="form-control" name="salary">
+                    <div class="form-group">
+                          <label for="location">location</label>
+                          <input type="text" class="form-control" name="location">
+                      </div>
+                    
+              </div>
+                     
+             
+            
+                          <div class="modal-footer">
+                            <button class="btn btn-primary btn-block" >
+                                Add
+                            </button>
+                        </div>
+              </form>
+          
+</div>
+      
+    </div>
+  </div>
+    </div>
+    <!-- form ends here -->
+    
+    <section id="footer" class="bg-dark">
+    <h4>HUMAN RESOURCE MANAGMENT SYSTEM</h4>
+    </section>
+    
+   <script>
+    function searchEmployee() {
+      var input = document.getElementById("searchInput").value.trim().toLowerCase();
+      var cards = document.querySelectorAll(".card");
+      var found = false;
+  
+      cards.forEach(function(card) {
+          var name = card.querySelector(".nam").textContent.trim().toLowerCase();
+          if (name.includes(input)) {
+              card.style.display = "";
+              found = true;
+          } else {
+              card.style.display = "none";
+          }
+      });
+  
+      // Display message if no matching employee found
+      var notFoundMsg = document.getElementById("notFoundMsg");
+      if (!found) {
+          if (!notFoundMsg) {
+              notFoundMsg = document.createElement("div");
+              notFoundMsg.id = "notFoundMsg";
+              notFoundMsg.textContent = "Employee not found in the database";
+              document.body.appendChild(notFoundMsg);
+          }
+      } else {
+          if (notFoundMsg) {
+              notFoundMsg.remove();
+          }
+      }
+  }
+  
+  
+</script>
+
+
+</body>
+    <script src="/assets/script.js"></script>
+</html>
